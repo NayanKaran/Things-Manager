@@ -3,7 +3,7 @@ class Book
     {
       label_id: @label.id,
       id: @id,
-      publish_date: @publish_date,
+      publish_date: @publish_date
     }.to_json
   end
 end
