@@ -35,9 +35,9 @@ describe Book do
   end
   describe '#to_json' do
     it 'should return a json representation of the book' do
-      expect(@book.to_json).to eq("{\"id\":\"#{@book.id}\",\"title\":\"title\","\
-                                  '"publish_date":"2020-01-01",'\
-                                  '"archived":false,"publisher":"publisher",'\
+      expect(@book.to_json).to eq("{\"id\":\"#{@book.id}\",\"title\":\"title\"," \
+                                  '"publish_date":"2020-01-01",' \
+                                  '"archived":false,"publisher":"publisher",' \
                                   '"cover_state":"bad","label_id":null}')
     end
   end
