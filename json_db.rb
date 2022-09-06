@@ -20,10 +20,10 @@ end
 
 def load_labels(labels)
   JSON.parse(File.read('./database/labels.json')).each do |label|
-    labels << Label.new(label['title'], label['color'], id:label['id'])
+    labels << Label.new(label['title'], label['color'], id: label['id'])
   end
-  rescue Errno::ENOENT
-    puts 'No labels found'
+rescue Errno::ENOENT
+  puts 'No labels found'
 end
 
 def save_state(app)

@@ -3,6 +3,7 @@ require_relative 'label'
 
 class App
   attr_accessor :books, :labels, :music_albums, :genres, :games, :authors
+
   def initialize
     @books = []
     @labels = []
@@ -47,7 +48,7 @@ class App
     @books.push(Book.new(publisher, cover_state, publish_date, title))
 
     @labels.push(Label.new(label, color)) unless @labels.any? { |l| l.title == label && l.color == color }
-    
+
     @labels.find { |l| l.title == label && l.color == color }.add_item(@books.last)
 
     puts 'Book created successfully'
