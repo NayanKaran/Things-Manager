@@ -11,7 +11,7 @@ def load_books(books, labels)
     labels.find { |label| label.id == book['label_id'] }&.add_item(books.last)
   end
 rescue Errno::ENOENT
-  puts 'No labels found'
+  puts 'No books found'
 end
 
 def save_labels(labels)
