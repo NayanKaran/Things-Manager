@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'date'
 
 class Item
   attr_reader :label, :genre, :author, :publish_date, :archived, :id
@@ -25,7 +26,7 @@ class Item
   end
 
   def can_be_archived?
-    @archived
+    Date.strptime(@publish_date,"%Y-%m-%d") < DateTime.now.prev_year(10)
   end
 
   def move_to_archive
