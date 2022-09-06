@@ -37,4 +37,4 @@ class Item
     @label = label
     label.items << self unless label.items.include?(self)
   end
-end    
+end
