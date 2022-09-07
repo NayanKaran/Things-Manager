@@ -38,6 +38,4 @@ describe Author do
     end
   end
 end
-
-
  
