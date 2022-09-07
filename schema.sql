@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS 'books' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL,
+  'publisher' TEXT NOT NULL,
+  'publish_date' DATE NOT NULL,
+  'achived' BOOLEAN NOT NULL DEFAULT FALSE,
+  'cover_state' TEXT NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS 'labels' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL
+  'color' TEXT NOT NULL
+);
