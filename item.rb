@@ -32,5 +32,4 @@ class Item
     @source = source
     label.items << self unless label.items.include?(self)
   end
-
 end
