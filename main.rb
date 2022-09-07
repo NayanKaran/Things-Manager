@@ -35,11 +35,10 @@ def execute_option(option, app) # rubocop:disable Metrics
   false
 end
 
-  while input != 13
-    Options.options
-    input = App.extract_input(Options::RANGE)
-    app.operation(input)
-  end
+while input != 13
+  Options.options
+  input = App.extract_input(Options::RANGE)
+  app.operation(input)
 end
 
 app = App::Catalog.new
