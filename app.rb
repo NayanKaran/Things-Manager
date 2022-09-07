@@ -72,7 +72,6 @@ class App
 
   def add_music_album; 
     name, price, artist, tracks, label, genre = Options.new.get_music_album_options(@labels, @genres)
-    # if genre is an object add it to the genres array else get the genre object from the genres array
     if genre.is_a?(Genre)
       @genres << genre unless @genres.include?(genre)
       genre = @genres.last
