@@ -8,7 +8,7 @@ class Catalog
     @games = []
   end
 
-  # call the methods you create for various classes
+  # rubocop:disable Metrics/CyclomaticComplexity
   def operation(input)
     case input
 
@@ -43,6 +43,7 @@ class Catalog
   end
 end
 
+# rubocop:enable Metrics/CyclomaticComplexity
 def self.extract_input(range)
   input = gets.chomp
   return "\n'#{input}' is not valid.\nPlease try again" unless range.include?(input.to_i)
