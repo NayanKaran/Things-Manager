@@ -13,8 +13,8 @@ class MusicAlbum < Item
     @publish_date = publish_date
   end
 
-  def on_spotify
-    true
+  def on_spotify(on_spotify: true)
+    on_spotify
   end
 
   def to_json(*_args)
