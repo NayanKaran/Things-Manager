@@ -24,13 +24,11 @@ describe MusicAlbum do
     end
   end
 
-  context 'can be converted to JSON' do
+  context 'can be converted to JSON' do # rubocop:disable Metrics/InterpolationCheck
     it 'should be converted to JSON' do
       music_album = MusicAlbum.new('The Dark Side of the Moon', 'Pink Floyd', 'Rock')
       expect(music_album.to_json).to eq(
-        "{\"id\":\"#{music_album.id}\",\"name\":\"The Dark Side of the Moon\",
-        \"label\":\"Pink Floyd\",\"genre\":\"Rock\",
-        \"publish_date\":\"#{music_album.publish_date}\",\"archived\":false}"
+        '{"id":"' + music_album.id + '","name":"The Dark Side of the Moon","label":"Pink Floyd","genre":"Rock","publish_date":"' + music_album.publish_date.to_s + '","archived":false}'
       )
     end
   end
