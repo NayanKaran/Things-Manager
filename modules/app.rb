@@ -9,7 +9,7 @@ class Catalog
   end
 
   # call the methods you create for various classes
-  def operation(input)
+  def operation(input) 
     case input
 
     when 1
