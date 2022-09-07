@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+require 'securerandom'
+>>>>>>> 1d3d25e2251e49868ea9f9eccd3154fe17e12abe
 require 'date'
 
 class Item
@@ -33,8 +37,13 @@ class Item
     label.items << self unless label.items.include?(self)
   end
 
+<<<<<<< HEAD
   def add_label(label)
     @label = label
     label.items << self unless label.items.include?(self)
+=======
+  def can_be_archived?
+    Date.strptime(@publish_date, '%Y-%m-%d') < DateTime.now.prev_year(10)
+>>>>>>> 1d3d25e2251e49868ea9f9eccd3154fe17e12abe
   end
 end
