@@ -1,40 +1,36 @@
 require_relative 'item'
 require 'securerandom'
 
-class Music_Album < Item
-  attr_reader :artist, :tracks, :name, :price, :id, :label, :genre
-  def initialize(name, price, artist, tracks, label, genre, publish_date = Time.now)
+class MusicAlbum < Item
+  attr_reader :name, :id, :label, :genre
+
+  def initialize(name, label, genre, publish_date = Time.now, id = SecureRandom.uuid)
     super(Time.now)
-    @id = SecureRandom.uuid
+    @id = id
     @name = name
-    @price = price
     @label = label
     @genre = genre
-    @artist = artist
-    @tracks = tracks
+    @publish_date = publish_date
   end
 
   def on_spotify
     true
   end
-  
-  def to_json(*args)
+
+  def to_json(*_args)
     {
-      JSON.create_id => self.class.name,
-      'id' => @id,
-      'name' => @name,
-      'price' => @price,
-      'artist' => @artist,
-      'tracks' => @tracks,
-      'publish_date' => @publish_date,
-      'archived' => @archived
-    }.to_json(*args)
+      id: @id,
+      name: @name,
+      label: @label,
+      genre: @genre,
+      publish_date: @publish_date,
+      archived: @archived
+    }.to_json
   end
 
   private
+
   def can_be_archived
     super && on_spotify
   end
-
-  
 end

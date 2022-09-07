@@ -30,33 +30,42 @@ def save_music_albums(music_albums)
   JSON.dump(music_albums, File.open('./database/music_albums.json', 'w'))
 end
 
-def load_music_albums(music_albums, genres)
-  JSON.parse(File.open('./database/music_albums.json', 'r')).each do |music_album|
-    music_albums << Music_Album.new(music_album['publish_date'], music_album['id'])
-    genres.find { |genre| genre.id == music_album['genre_id'] }.add_item(music_albums.last)
+def load_music_albums(music_albums)
+  # check if file exists guard clause
+  return unless File.exist?('./database/music_albums.json')
+
+  JSON.parse(File.read('./database/music_albums.json')).each do |music_album|
+    music_albums << MusicAlbum.new(
+      music_album['name'], music_album['label'], music_album['genre'],
+      music_album['publish_date'], id: music_album['id']
+    )
+    music_albums.last.move_to_archive if music_album['archived']
+  end
+end
+
+def save_genres(genres)
+  JSON.dump(genres, File.open('./database/genres.json', 'w'))
+end
+
+def load_genres(genres)
+  # check if file exists
+  return unless File.exist?('./database/genres.json')
+
+  JSON.parse(File.read('./database/genres.json')).each do |genre|
+    genres << Genre.new(genre['name'], genre['id'])
   end
 end
 
 def save_state(app)
-  # save_labels(app.labels)
-  # save_books(app.books)
-  # save_genres(app.genres)
-  save_music_albums(app.music_albums.map(&:to_json))
+  save_music_albums(app.music_albums)
   save_labels(app.labels)
   save_books(app.books)
-  # save_genres(app.genres)
-  # save_music_albums(app.music_albums)
-  # save_authors(app.authors)
-  # save_games(app.games)
+  save_genres(app.genres)
 end
 
 def load_state(app)
-  # load_labels(app.labels)
-  # load_books(app.books, app.labels)
   load_labels(app.labels)
   load_books(app.books, app.labels)
-  # load_genres(app.genres)
-  # load_music_albums(app.music_albums)
-  # load_authors(app.authors)
-  # load_games(app.games)
+  load_genres(app.genres)
+  load_music_albums(app.music_albums)
 end

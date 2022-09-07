@@ -59,31 +59,32 @@ class App
   def list_music_albums
     puts 'No music albums yet' if @music_albums.empty?
     @music_albums.each_with_index do |music_album, index|
-      puts "[#{index}] ID: #{music_album.id}, Date:#{music_album.publish_date}, Name: #{music_album.name}, Price: #{music_album.price}, Artist: #{music_album.artist}, Tracks: #{music_album.tracks}, Label: #{music_album.label}, Genre: #{music_album.genre}"
+      puts "[#{index}] ID: #{music_album.id}, Name: #{music_album.name},
+      Label: #{music_album.label}, Genre: #{music_album.genre}"
     end
   end
 
-  def list_genres;
+  def list_genres
     puts 'No genres yet' if @genres.empty?
     @genres.each_with_index do |genre, index|
       puts "[#{index}] ID: #{genre.id}, Name: #{genre.name}"
     end
   end
 
-  def add_music_album; 
-    name, price, artist, tracks, label, genre = Options.new.get_music_album_options(@labels, @genres)
+  def add_music_album
+    name, label, genre = Options.new.get_music_album_options(@labels, @genres)
     if genre.is_a?(Genre)
       @genres << genre unless @genres.include?(genre)
       genre = @genres.last
     else
       genre = @genres.find { |g| g.id == genre }
     end
-    music_album = Music_Album.new(name, price, artist, tracks, label, genre.name)
-    
-    if @music_albums << music_album 
-      return true
+    music_album = MusicAlbum.new(name, label, genre.name)
+
+    if @music_albums << music_album
+      true
     else
-      return false
+      false
     end
   end
 

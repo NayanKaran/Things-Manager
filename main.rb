@@ -41,7 +41,7 @@ def execute_option(option, app) # rubocop:disable Metrics
   when '7'
     app.add_book
   when '8'
-    if app.add_music_album === true 
+    if app.add_music_album
       puts 'Awesome! Your new music album is ready.'
     else
       puts 'Sorry! Something went wrong.'
