@@ -1,7 +1,7 @@
 require './item'
 
 class Game < Item
-  attr_accessor :mulitiplayer, :last_
+  attr_accessor :mulitiplayer, :last_played_at
 
   def initialize(mulitiplayer, last_played_at, *args)
     @mulitiplayer = mulitiplayer
