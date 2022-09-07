@@ -1,49 +1,38 @@
-<<<<<<< HEAD
-=======
 require 'securerandom'
->>>>>>> 1d3d25e2251e49868ea9f9eccd3154fe17e12abe
 require 'date'
 
 class Item
-  attr_accessor :genre, :author, :source, :label
-  attr_reader :id, :publish_date, :archived
+  attr_reader :label, :genre, :author, :publish_date, :archived, :id
 
   def initialize(publish_date)
-    @id = Random.rand(1..1000)
+    @id = SecureRandom.uuid
     @publish_date = publish_date
     @archived = false
   end
 
-  def can_be_archived?
-    Time.now.year - Date.parse(@publish_date).year > 10
-  end
-
-  def move_to_archive
-    @archived = true if can_be_archived?
-  end
-
-  def add_genre(genre)
+  def genre=(genre)
     @genre = genre
     genre.items << self unless genre.items.include?(self)
   end
 
-  def add_author(author)
+  def author=(author)
     @author = author
-    author.items.push(self) unless author.items.include?(self)
+    author.items << self unless author.items.include?(self)
   end
 
-  def add_source(source)
-    @source = source
-    label.items << self unless label.items.include?(self)
-  end
-
-<<<<<<< HEAD
-  def add_label(label)
+  def label=(label)
     @label = label
     label.items << self unless label.items.include?(self)
-=======
+  end
+
   def can_be_archived?
     Date.strptime(@publish_date, '%Y-%m-%d') < DateTime.now.prev_year(10)
->>>>>>> 1d3d25e2251e49868ea9f9eccd3154fe17e12abe
   end
+
+  def move_to_archive
+    @archived = true
+  end
+
+  private :can_be_archived?
 end
+
