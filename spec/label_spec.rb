@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-require_relative '../lib/classes/label'
-describe Label do
-  before :each do
-    @label = Label.new('title', 'red')
-  end
-
-  it 'Return a label' do
-    expect(@label).to be_a_instance_of Label
-  end
-
-  it 'Label has a title' do
-    expect(@label.title).to eq 'title'
-  end
-
-  it 'Label has a color' do
-    expect(@label.color).to eq 'red'
-=======
 require_relative '../label'
 
 describe Label do
@@ -45,6 +27,5 @@ describe Label do
     it 'should return a json representation of the label' do
       expect(@label.to_json).to eq("{\"id\":\"#{@label.id}\",\"title\":\"label\",\"color\":\"red\"}")
     end
->>>>>>> dev
   end
 end
