@@ -47,7 +47,7 @@ class Options
     else
       puts 'Choose a genre from the list or select # to add a new one:'
       genres.each_with_index do |this_genre, index|
-        puts "[#{index}] #{this_genre}"
+        puts "[#{index}] #{this_genre.name}"
       end
       genre = gets.chomp
       if genre == '#'
