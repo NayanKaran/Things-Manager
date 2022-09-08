@@ -37,7 +37,8 @@ def load_music_albums(music_albums)
   JSON.parse(File.read('./database/music_albums.json')).each do |music_album|
     music_albums << MusicAlbum.new(
       music_album['name'], music_album['label'], music_album['genre'],
-      music_album['publish_date'], id: music_album['id']
+      publish_date: music_album['publish_date'],
+      id: music_album['id']
     )
     music_albums.last.move_to_archive if music_album['archived']
   end
