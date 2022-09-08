@@ -1,9 +1,3 @@
-# Create a main.rb file that will serve as your console app entry-point.
-# Implement startup actions:
-# Present the user with a list of options to perform.
-# Let users choose an option.
-# If needed, ask for parameters for the option.
-# Have a way to quit the app.
 require_relative 'app'
 require_relative './json_db'
 
