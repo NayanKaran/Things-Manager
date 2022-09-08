@@ -13,7 +13,7 @@ class Options
     [name, label, genre]
   end
 
-  def get_label_options(labels)
+  def get_label_options(labels) # rubocop:disable Metrics/MethodLength
     if labels.empty?
       puts 'Enter the label title of the music album:'
       title = gets.chomp
