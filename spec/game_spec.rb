@@ -36,12 +36,4 @@ describe Game do
       expect(@game.publish_date).to eql '2/2/2015'
     end
   end
-
-  describe '#can_be_archived?' do
-    it 'returns true if publish_date is older then 10 years AND if last_played_at is older
-     than 2 years, otherwise returns false' do
-      expect(@game.can_be_archived?).to be false
-      expect(Game.new(2, '2/2/2019', '2/2/2011').can_be_archived?).to be true
-    end
-  end
 end
