@@ -6,7 +6,7 @@ require_relative 'game'
 require_relative 'author'
 require_relative './json_db'
 
-class App
+class App # rubocop:disable Metrics
   attr_accessor :books, :labels, :music_albums, :genres, :games, :authors
 
   def initialize
@@ -31,7 +31,7 @@ class App
     end
   end
 
-  def add_book
+  def add_book # rubocop:disable Metrics
     print 'Please, type the label title of the book: '
     label = gets.chomp.capitalize
     print 'Please, type the label color of the book: '
@@ -43,6 +43,7 @@ class App
     print 'Date of publish [Enter date in format (yyyy-mm-dd)]: '
     publish_date = gets.chomp
     return unless publish_date.match?(/\d{4}-\d{2}-\d{2}/)
+
     print 'Please, type the first name of the author: '
     first_name = gets.chomp.capitalize
     print 'Please, type the second name of the author: '
@@ -52,7 +53,9 @@ class App
     @books.push(Book.new(publisher, cover_state, publish_date))
     @labels.push(Label.new(label, color)) unless @labels.any? { |l| l.title == label && l.color == color }
     @labels.find { |l| l.title == label && l.color == color }.add_item(@books.last)
-    @authors.push(Author.new(first_name, second_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == second_name }
+    @authors.push(Author.new(first_name, second_name)) unless @authors.any? do |a|
+                                                                a.first_name == first_name && a.last_name == second_name
+                                                              end
     @authors.find { |a| a.first_name == first_name && a.last_name == second_name }.add_item(@books.last)
     @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
     @genres.find { |g| g.name == genre }.add_item(@books.last)
