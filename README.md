@@ -36,7 +36,7 @@ To get a local copy up and running follow these simple example steps.
 - Twitter: [@twitterhandle](https://twitter.com/kwekubright_)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/kwekubright)
 
-👤 **Silvia Tofana **
+👤 **Silvia Tofana**
 
 - GitHub: [@silviatofana](https://github.com/silviatofana)
 - LinkedIn: [@silviatofana](https://www.linkedin.com/in/silviatofana)
