@@ -141,7 +141,7 @@ class App
                'Add a book',
                'Add a music album',
                'Add a game',
-               'Exit']
+               'Save & Exit']
     puts 'Please choose an option by entering a number:'
     options.each_with_index do |option, index|
       puts "#{index + 1} - #{option}"
