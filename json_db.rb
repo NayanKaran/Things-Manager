@@ -57,14 +57,14 @@ def load_genres(genres)
   end
 end
 
-def save_state(app)
+def save_data(app)
   save_music_albums(app.music_albums)
   save_labels(app.labels)
   save_books(app.books)
   save_genres(app.genres)
 end
 
-def load_state(app)
+def load_data(app)
   load_labels(app.labels)
   load_books(app.books, app.labels)
   load_genres(app.genres)

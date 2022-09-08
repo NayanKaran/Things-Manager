@@ -4,6 +4,7 @@ require_relative 'book'
 require_relative 'label'
 require_relative 'game'
 require_relative 'author'
+require_relative './json_db'
 
 class App
   attr_accessor :books, :labels, :music_albums, :genres, :games, :authors
@@ -15,6 +16,7 @@ class App
     @genres = []
     @games = []
     @authors = []
+    @exit = false
   end
 
   def list_books
@@ -84,9 +86,9 @@ class App
     music_album = MusicAlbum.new(name, label, genre.name)
 
     if @music_albums << music_album
-      true
+      puts 'Awesome! Your new music album is ready.'
     else
-      false
+      puts 'Sorry! Something went wrong.'
     end
   end
 
@@ -127,5 +129,50 @@ class App
     game = Game.new(mplayer, last_played_at, published)
     @games << game
     puts "Game #{mplayer} created successfully."
+  end
+
+  def print_options
+    options = ['List all books',
+               'List all music albums',
+               'List of games',
+               "List all genres (e.g 'Comedy', 'Thriller')",
+               "List all labels (e.g. 'Gift', 'New')",
+               "List all authors (e.g. 'Stephen King')",
+               'Add a book',
+               'Add a music album',
+               'Add a game',
+               'Exit']
+    puts 'Please choose an option by entering a number:'
+    options.each_with_index do |option, index|
+      puts "#{index + 1} - #{option}"
+    end
+  end
+
+  def execute_option(option) # rubocop:disable Metrics
+    return list_books if option == 1
+    return list_music_albums if option == 2
+    return list_games if option == 3
+    return list_genres if option == 4
+    return list_labels if option == 5
+    return list_authors if option == 6
+    return add_book if option == 7
+    return add_music_album if option == 8
+    return add_game if option == 9
+    return exit if option == 10
+
+    puts 'Invalid option'
+  end
+
+  def run
+    load_data(self)
+    while @exit == false
+      print_options
+      execute_option(gets.chomp.to_i)
+    end
+    save_data(self)
+  end
+
+  def exit
+    @exit = true
   end
 end
