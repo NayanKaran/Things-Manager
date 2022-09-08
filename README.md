@@ -39,7 +39,7 @@ To get a local copy up and running follow these simple example steps.
 👤 **Silvia Tofana **
 
 - GitHub: [@silviatofana](https://github.com/silviatofana)
-- LinkedIn: [@silviatofana](www.linkedin.com/in/silviatofana)
+- LinkedIn: [@silviatofana](https://www.linkedin.com/in/silviatofana)
 - Twitter: [@silviatofana](https://twitter.com/SilviaTofana)
 
 ## 🤝 Contributing
