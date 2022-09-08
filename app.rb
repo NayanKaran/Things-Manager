@@ -95,7 +95,7 @@ class App
     @games.each_with_index do |game, index|
       s = "Last played at: #{game.last_played_at} - published: #{game.publish_date}"
       p "#{index}) Mulitiplayer: #{game.mulitiplayer} - " + s
-    end  
+    end
   end
 
   def add_authors()
