@@ -32,31 +32,30 @@ class App
   end
 
   def add_book
-    print 'Please, type the book title: '
-    title = gets.chomp
-
+    print 'Please, type the label title of the book: '
+    label = gets.chomp.capitalize
+    print 'Please, type the label color of the book: '
+    color = gets.chomp.capitalize
     print 'Please, type the book publisher: '
     publisher = gets.chomp
-
     print 'Please, type the book cover state: '
     cover_state = gets.chomp
-
     print 'Date of publish [Enter date in format (yyyy-mm-dd)]: '
     publish_date = gets.chomp
     return unless publish_date.match?(/\d{4}-\d{2}-\d{2}/)
-
-    print 'Please, type the book label: '
-    label = gets.chomp.capitalize
-
-    print 'Please, type the label color: '
-    color = gets.chomp.capitalize
-
-    @books.push(Book.new(publisher, cover_state, publish_date, title))
-
+    print 'Please, type the first name of the author: '
+    first_name = gets.chomp.capitalize
+    print 'Please, type the second name of the author: '
+    second_name = gets.chomp.capitalize
+    print 'Please, type the genre of the book: '
+    genre = gets.chomp.capitalize
+    @books.push(Book.new(publisher, cover_state, publish_date))
     @labels.push(Label.new(label, color)) unless @labels.any? { |l| l.title == label && l.color == color }
-
     @labels.find { |l| l.title == label && l.color == color }.add_item(@books.last)
-
+    @authors.push(Author.new(first_name, second_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == second_name }
+    @authors.find { |a| a.first_name == first_name && a.last_name == second_name }.add_item(@books.last)
+    @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
+    @genres.find { |g| g.name == genre }.add_item(@books.last)
     puts 'Book created successfully'
   end
 

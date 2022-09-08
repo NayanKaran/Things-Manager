@@ -4,12 +4,11 @@ require 'json'
 class Book < Item
   attr_reader :publisher, :cover_state
 
-  def initialize(publisher, cover_state, publish_date, title, id: SecureRandom.uuid)
+  def initialize(publisher, cover_state, publish_date, id: SecureRandom.uuid)
     super(publish_date)
     @id = id
     @publisher = publisher
     @cover_state = cover_state
-    @title = title
   end
 
   def can_be_archived?
@@ -19,20 +18,23 @@ class Book < Item
   def to_json(*_args)
     {
       id: @id,
-      title: @title,
       publish_date: @publish_date,
       archived: @archived,
       publisher: @publisher,
       cover_state: @cover_state,
-      label_id: @label&.id
+      label_id: @label&.id,
+      genre_id: @genre&.id,
+      author_id: @author&.id
     }.to_json
   end
 
   def to_s
-    "Book: title = #{@title}, publisher = #{@publisher}, " \
+    "Book: publisher = #{@publisher}, " \
       "cover_state = #{@cover_state}, publish_date = #{@publish_date}, " \
       "archived = #{@archived}, label_title = #{@label&.title}, " \
-      "label_color = #{@label&.color}"
+      "label_color = #{@label&.color}, " \
+      "author = #{@author&.first_name} #{@author&.last_name}, " \
+      "genre = #{@genre&.name}"
   end
   private :can_be_archived?
 end
