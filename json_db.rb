@@ -1,11 +1,11 @@
 require 'json'
 
 def save_books(books)
-  JSON.dump(books, File.open('./database/books.json', 'w'))
+  JSON.dump(books, File.open('./data/books.json', 'w'))
 end
 
 def load_books(books, labels)
-  JSON.parse(File.read('./database/books.json')).each do |book|
+  JSON.parse(File.read('./data/books.json')).each do |book|
     books << Book.new(book['publisher'], book['cover_state'], book['publish_date'], book['title'], id: book['id'])
     books.last.move_to_archive if book['archived']
     labels.find { |label| label.id == book['label_id'] }&.add_item(books.last)
@@ -15,11 +15,11 @@ rescue Errno::ENOENT
 end
 
 def save_labels(labels)
-  JSON.dump(labels, File.open('./database/labels.json', 'w'))
+  JSON.dump(labels, File.open('./data/labels.json', 'w'))
 end
 
 def load_labels(labels)
-  JSON.parse(File.read('./database/labels.json')).each do |label|
+  JSON.parse(File.read('./data/labels.json')).each do |label|
     labels << Label.new(label['title'], label['color'], id: label['id'])
   end
 rescue Errno::ENOENT
@@ -27,14 +27,14 @@ rescue Errno::ENOENT
 end
 
 def save_music_albums(music_albums)
-  JSON.dump(music_albums, File.open('./database/music_albums.json', 'w'))
+  JSON.dump(music_albums, File.open('./data/music_albums.json', 'w'))
 end
 
 def load_music_albums(music_albums)
   # check if file exists guard clause
-  return unless File.exist?('./database/music_albums.json')
+  return unless File.exist?('./data/music_albums.json')
 
-  JSON.parse(File.read('./database/music_albums.json')).each do |music_album|
+  JSON.parse(File.read('./data/music_albums.json')).each do |music_album|
     music_albums << MusicAlbum.new(
       music_album['name'], music_album['label'], music_album['genre'],
       publish_date: music_album['publish_date'],
@@ -45,14 +45,14 @@ def load_music_albums(music_albums)
 end
 
 def save_genres(genres)
-  JSON.dump(genres, File.open('./database/genres.json', 'w'))
+  JSON.dump(genres, File.open('./data/genres.json', 'w'))
 end
 
 def load_genres(genres)
   # check if file exists
-  return unless File.exist?('./database/genres.json')
+  return unless File.exist?('./data/genres.json')
 
-  JSON.parse(File.read('./database/genres.json')).each do |genre|
+  JSON.parse(File.read('./data/genres.json')).each do |genre|
     genres << Genre.new(genre['name'], genre['id'])
   end
 end
