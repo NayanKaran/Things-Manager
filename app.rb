@@ -2,6 +2,8 @@ require_relative 'music_album'
 require_relative 'options'
 require_relative 'book'
 require_relative 'label'
+require_relative 'game'
+require_relative 'author'
 
 class App
   attr_accessor :books, :labels, :music_albums, :genres, :games, :authors
@@ -88,9 +90,42 @@ class App
     end
   end
 
-  def list_games; end
+  def list_games
+    puts 'Games list is empty! Add a game.' if @games.empty?
+    @games.each_with_index do |game, index|
+      s = "Last played at: #{game.last_played_at} - published: #{game.publish_date}"
+      p "#{index}) Mulitiplayer: #{game.mulitiplayer} - " + s
+    end  
+  end
 
-  def list_authors; end
+  def add_authors()
+    init = []
+    author_names = ['Stephen King', 'Charles Dickens', 'James Fenimore Cooper']
+    author_names.each do |author|
+      first_name = author.split[0]
+      last_name = author.split[1]
+      init << Author.new(first_name, last_name)
+    end
+    init
+  end
 
-  def add_game; end
+  def list_authors
+    authors = add_authors
+    puts 'Author list is empty! Add a author.' if authors.empty?
+    authors.each_with_index do |author, index|
+      p "#{index}) #{author.first_name} #{author.last_name}"
+    end
+  end
+
+  def add_game
+    print 'Mulitiplayer: '
+    mplayer = gets.chomp
+    print 'Last played at: '
+    last_played_at = gets.chomp
+    print 'Published: '
+    published = gets.chomp
+    game = Game.new(mplayer, last_played_at, published)
+    @games << game
+    puts "Game #{mplayer} created successfully."
+  end
 end

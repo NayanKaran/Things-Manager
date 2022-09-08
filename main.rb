@@ -1,7 +1,22 @@
-require_relative 'modules/options'
-require_relative 'modules/app'
+require_relative 'app'
+require_relative './json_db'
 
-puts 'Welcome to My Catalog'
+def print_options
+  options = ['List all books',
+             'List all music albums',
+             'List of games',
+             "List all genres (e.g 'Comedy', 'Thriller')",
+             "List all labels (e.g. 'Gift', 'New')",
+             "List all authors (e.g. 'Stephen King')",
+             'Add a book',
+             'Add a music album',
+             'Add a game',
+             'Exit']
+  puts 'Please choose an option by entering a number:'
+  options.each_with_index do |option, index|
+    puts "#{index + 1} - #{option}"
+  end
+end
 
 def execute_option(option, app) # rubocop:disable Metrics
   case option
@@ -35,12 +50,18 @@ def execute_option(option, app) # rubocop:disable Metrics
   false
 end
 
-while input != 13
-  Options.options
-  input = App.extract_input(Options::RANGE)
-  app.operation(input)
+def main
+  puts 'Welcome to the Things manager app!'
+  puts
+  app = App.new
+  load_state(app)
+  exit = false
+  while exit == false
+    print_options
+    exit = execute_option(gets.chomp, app)
+  end
+  save_state(app)
+  puts 'Thank you for using this app!'
 end
 
-app = App::Catalog.new
-
-main(app)
+main
