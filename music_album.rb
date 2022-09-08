@@ -4,7 +4,7 @@ require 'securerandom'
 class MusicAlbum < Item
   attr_reader :name, :id, :label, :genre
 
-  def initialize(name, label, genre, publish_date = Time.now, id = SecureRandom.uuid)
+  def initialize(name, label, genre, publish_date: Time.now, id: SecureRandom.uuid)
     super(Time.now)
     @id = id
     @name = name

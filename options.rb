@@ -31,7 +31,8 @@ class Options
         title = gets.chomp
         puts 'Enter the label color of the music album:'
         color = gets.chomp
-        labels << Label.new(title, color)
+        label = Label.new(title, color)
+        labels << label
       else
         label = labels[label.to_i]
       end
