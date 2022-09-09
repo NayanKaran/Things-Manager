@@ -65,9 +65,9 @@ class App # rubocop:disable Metrics
   def list_music_albums
     puts 'No music albums yet' if @music_albums.empty?
     @music_albums.each_with_index do |music_album, index|
-      puts "[#{index}] ID: #{music_album.id}," \
-           " Label title: #{music_album.label.title}," \
-           " Genre name: #{music_album.genre.name}"
+      puts "[#{index}] ID: #{music_album.id}, " \
+           "Label title: #{music_album.label.title}, " \
+           "Genre name: #{music_album.genre.name}"
     end
   end
 
