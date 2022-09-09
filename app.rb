@@ -65,7 +65,7 @@ class App # rubocop:disable Metrics
   def list_music_albums
     puts 'No music albums yet' if @music_albums.empty?
     @music_albums.each_with_index do |music_album, index|
-      puts "[#{index}] ID: #{music_album.id}, Label title: #{music_album.label.title}, Genre: #{music_album.genre}"
+      puts "[#{index}] ID: #{music_album.id}, Label title: #{music_album.label.title}, Genre name: #{music_album.genre.name}"
     end
   end
 
@@ -77,20 +77,28 @@ class App # rubocop:disable Metrics
   end
 
   def add_music_album
-    label, genre = Options.new.get_music_album_options(@labels, @genres)
-    if genre.is_a?(Genre)
-      @genres << genre unless @genres.include?(genre)
-      genre = @genres.last
-    else
-      genre = @genres.find { |g| g.id == genre }
-    end
-    music_album = MusicAlbum.new(label, genre.name)
-
-    if @music_albums << music_album
-      puts 'Awesome! Your new music album is ready.'
-    else
-      puts 'Sorry! Something went wrong.'
-    end
+    print 'Please, type the label title of the music album: '
+    label = gets.chomp.capitalize
+    print 'Please, type the label color of the music album: '
+    color = gets.chomp.capitalize
+    print 'Please, type the music album genre: '
+    genre = gets.chomp.capitalize
+    print 'is it on spotify? [y/n]: '
+    spotify = gets.chomp == 'y'
+    print 'Please, type the music album author first name: '
+    first_name = gets.chomp.capitalize
+    print 'Please, type the music album author last name: '
+    last_name = gets.chomp.capitalize
+    print 'Please, type the publish date of the music album: '
+    publish_date = gets.chomp
+    @music_albums.push(MusicAlbum.new(spotify, publish_date))
+    @labels.push(Label.new(label, color)) unless @labels.any? { |l| l.title == label && l.color == color }
+    @labels.find { |l| l.title == label && l.color == color }.add_item(@music_albums.last)
+    @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
+    @genres.find { |g| g.name == genre }.add_item(@music_albums.last)
+    @authors.push(Author.new(first_name, last_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == last_name }
+    @authors.find { |a| a.first_name == first_name && a.last_name == last_name }.add_item(@music_albums.last)
+    puts 'Music album created successfully'
   end
 
   def list_games
@@ -101,35 +109,37 @@ class App # rubocop:disable Metrics
     end
   end
 
-  def add_authors()
-    init = []
-    author_names = ['Stephen King', 'Charles Dickens', 'James Fenimore Cooper']
-    author_names.each do |author|
-      first_name = author.split[0]
-      last_name = author.split[1]
-      init << Author.new(first_name, last_name)
-    end
-    init
-  end
-
   def list_authors
-    authors = add_authors
-    puts 'Author list is empty! Add a author.' if authors.empty?
-    authors.each_with_index do |author, index|
-      p "#{index}) #{author.first_name} #{author.last_name}"
+    @authors.each_with_index do |author, index|
+      puts "[#{index}] ID: #{author.id}, First name: #{author.first_name}, Last name: #{author.last_name}"
     end
   end
 
   def add_game
-    print 'Mulitiplayer: '
-    mplayer = gets.chomp
-    print 'Last played at: '
+    print 'Please, type the label title of the game: '
+    label = gets.chomp.capitalize
+    print 'Please, type the label color of the game: '
+    color = gets.chomp.capitalize
+    print 'Please, type the game genre: '
+    genre = gets.chomp.capitalize
+    print 'Please, type the game author first name: '
+    first_name = gets.chomp.capitalize
+    print 'Please, type the game author last name: '
+    last_name = gets.chomp.capitalize
+    print 'Please, type the publish date of the game: '
+    publish_date = gets.chomp
+    print 'Is it multiplayer? [y/n]: '
+    multiplayer = gets.chomp == 'y'
+    print 'Please, type the last played date of the game: '
     last_played_at = gets.chomp
-    print 'Published: '
-    published = gets.chomp
-    game = Game.new(mplayer, last_played_at, published)
-    @games << game
-    puts "Game #{mplayer} created successfully."
+    @games.push(Game.new(multiplayer, last_played_at, publish_date))
+    @labels.push(Label.new(label, color)) unless @labels.any? { |l| l.title == label && l.color == color }
+    @labels.find { |l| l.title == label && l.color == color }.add_item(@games.last)
+    @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
+    @genres.find { |g| g.name == genre }.add_item(@games.last)
+    @authors.push(Author.new(first_name, last_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == last_name }
+    @authors.find { |a| a.first_name == first_name && a.last_name == last_name }.add_item(@games.last)
+    puts 'Game created successfully'
   end
 
   def print_options
