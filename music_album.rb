@@ -4,20 +4,19 @@ require 'securerandom'
 class MusicAlbum < Item
   attr_reader :id, :label, :genre, :on_spotify, :publish_date
 
-  def initialize(label, genre, publish_date: Time.now, id: SecureRandom.uuid)
-    super(Time.now)
+  def initialize(on_spotify, publish_date, id: SecureRandom.uuid)
+    super(publish_date)
     @id = id
-    @label = label
-    @genre = genre
-    @on_spotify = true
-    @publish_date = publish_date
+    @on_spotify = on_spotify
   end
 
   def to_json(*_args)
     {
       id: @id,
-      label: @label.id,
-      genre: @genre,
+      label_id: @label.id,
+      genre_id: @genre.id,
+      author_id: @author.id,
+      on_spotify: @on_spotify,
       publish_date: @publish_date,
       archived: @archived
     }.to_json
