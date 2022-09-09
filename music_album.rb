@@ -2,26 +2,21 @@ require_relative 'item'
 require 'securerandom'
 
 class MusicAlbum < Item
-  attr_reader :name, :id, :label, :genre
+  attr_reader :id, :label, :genre, :on_spotify, :publish_date
 
-  def initialize(name, label, genre, publish_date: Time.now, id: SecureRandom.uuid)
+  def initialize(label, genre, publish_date: Time.now, id: SecureRandom.uuid)
     super(Time.now)
     @id = id
-    @name = name
     @label = label
     @genre = genre
+    @on_spotify = true
     @publish_date = publish_date
-  end
-
-  def on_spotify(on_spotify: true)
-    on_spotify
   end
 
   def to_json(*_args)
     {
       id: @id,
-      name: @name,
-      label: @label,
+      label: @label.id,
       genre: @genre,
       publish_date: @publish_date,
       archived: @archived
