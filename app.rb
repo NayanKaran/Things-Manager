@@ -65,8 +65,7 @@ class App # rubocop:disable Metrics
   def list_music_albums
     puts 'No music albums yet' if @music_albums.empty?
     @music_albums.each_with_index do |music_album, index|
-      puts "[#{index}] ID: #{music_album.id}, Name: #{music_album.name},
-      Label: #{music_album.label}, Genre: #{music_album.genre}"
+      puts "[#{index}] ID: #{music_album.id}, Label title: #{music_album.label.title}, Genre: #{music_album.genre}"
     end
   end
 
@@ -78,14 +77,14 @@ class App # rubocop:disable Metrics
   end
 
   def add_music_album
-    name, label, genre = Options.new.get_music_album_options(@labels, @genres)
+    label, genre = Options.new.get_music_album_options(@labels, @genres)
     if genre.is_a?(Genre)
       @genres << genre unless @genres.include?(genre)
       genre = @genres.last
     else
       genre = @genres.find { |g| g.id == genre }
     end
-    music_album = MusicAlbum.new(name, label, genre.name)
+    music_album = MusicAlbum.new(label, genre.name)
 
     if @music_albums << music_album
       puts 'Awesome! Your new music album is ready.'

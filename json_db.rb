@@ -30,17 +30,18 @@ def save_music_albums(music_albums)
   JSON.dump(music_albums, File.open('./data/music_albums.json', 'w'))
 end
 
-def load_music_albums(music_albums)
+def load_music_albums(app)
   # check if file exists guard clause
   return unless File.exist?('./data/music_albums.json')
 
   JSON.parse(File.read('./data/music_albums.json')).each do |music_album|
-    music_albums << MusicAlbum.new(
-      music_album['name'], music_album['label'], music_album['genre'],
+    # get the label with the id of the music album
+    label = app.labels.find { |label| label.id == music_album['label'] }
+    app.music_albums << MusicAlbum.new(label, music_album['genre'],
       publish_date: music_album['publish_date'],
       id: music_album['id']
     )
-    music_albums.last.move_to_archive if music_album['archived']
+    app.music_albums.last.move_to_archive if music_album['archived']
   end
 end
 
@@ -68,5 +69,5 @@ def load_data(app)
   load_labels(app.labels)
   load_books(app.books, app.labels)
   load_genres(app.genres)
-  load_music_albums(app.music_albums)
+  load_music_albums(app)
 end

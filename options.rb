@@ -4,13 +4,10 @@ require_relative 'label'
 
 class Options
   def get_music_album_options(labels, genres)
-    puts 'Enter the name of the music album:'
-    name = gets.chomp
-
     label = get_label_options(labels)
     genre = get_genre_options(genres)
 
-    [name, label, genre]
+    [label, genre]
   end
 
   def get_label_options(labels) # rubocop:disable Metrics/MethodLength
