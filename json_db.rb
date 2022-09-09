@@ -4,7 +4,7 @@ def save_books(books)
   JSON.dump(books, File.open('./data/books.json', 'w'))
 end
 
-def load_books(app)
+def load_books(app) # rubocop:disable Metrics
   JSON.parse(File.read('./data/books.json')).each do |book|
     books << Book.new(book['publisher'], book['cover_state'], book['publish_date'], id: book['id'])
     books.last.move_to_archive if book['archived']
@@ -32,7 +32,7 @@ def save_music_albums(music_albums)
   JSON.dump(music_albums, File.open('./data/music_albums.json', 'w'))
 end
 
-def load_music_albums(app)
+def load_music_albums(app) # rubocop:disable Metrics
   JSON.parse(File.read('./data/music_albums.json')).each do |music_album|
     app.music_albums << MusicAlbum.new(music_album['on_spotify'], music_album['publish_date'], id: music_album['id'])
     app.music_albums.last.move_to_archive if music_album['archived']
@@ -65,15 +65,15 @@ def load_authors(authors)
   JSON.parse(File.read('./data/authors.json')).each do |author|
     authors << Author.new(author['first_name'], author['last_name'], id: author['id'])
   end
-  rescue Errno::ENOENT
-    puts 'No authors found'
+rescue Errno::ENOENT
+  puts 'No authors found'
 end
 
 def save_games(games)
   JSON.dump(games, File.open('./data/games.json', 'w'))
 end
 
-def load_games(app)
+def load_games(app) # rubocop:disable Metrics
   JSON.parse(File.read('./data/games.json')).each do |game|
     app.games << Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'], id: game['id'])
     app.games.last.move_to_archive if game['archived']

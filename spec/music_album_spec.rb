@@ -14,7 +14,7 @@ describe MusicAlbum do
 
   context 'on Spotify' do
     it 'should be on Spotify' do
-      music_album = MusicAlbum.new(true, 2020-01-01)
+      music_album = MusicAlbum.new(true, 2020 - 0o1 - 0o1)
       expect(music_album.on_spotify).to be(true)
     end
   end
@@ -39,7 +39,7 @@ describe MusicAlbum do
 
   context 'should have a genre' do
     it 'should have a genre' do
-      music_album = MusicAlbum.new(true, 2020-01-01)
+      music_album = MusicAlbum.new(true, 2020 - 0o1 - 0o1)
       genre = Genre.new('Rock')
       genre.add_item(music_album)
       expect(music_album.genre).to_not be(nil)
@@ -48,7 +48,7 @@ describe MusicAlbum do
 
   context 'should have a label' do
     it 'should have a label' do
-      music_album = MusicAlbum.new(true, 2020-01-01)
+      music_album = MusicAlbum.new(true, 2020 - 0o1 - 0o1)
       label = Label.new('test', 'red')
       label.add_item(music_album)
       expect(music_album.label).to_not be(nil)

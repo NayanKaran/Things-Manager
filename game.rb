@@ -27,5 +27,4 @@ class Game < Item
       archived: @archived
     }.to_json
   end
-
 end

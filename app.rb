@@ -65,7 +65,9 @@ class App # rubocop:disable Metrics
   def list_music_albums
     puts 'No music albums yet' if @music_albums.empty?
     @music_albums.each_with_index do |music_album, index|
-      puts "[#{index}] ID: #{music_album.id}, Label title: #{music_album.label.title}, Genre name: #{music_album.genre.name}"
+      puts "[#{index}] ID: #{music_album.id}," \
+           " Label title: #{music_album.label.title}," \
+           " Genre name: #{music_album.genre.name}"
     end
   end
 
@@ -76,7 +78,7 @@ class App # rubocop:disable Metrics
     end
   end
 
-  def add_music_album
+  def add_music_album # rubocop:disable Metrics
     print 'Please, type the label title of the music album: '
     label = gets.chomp.capitalize
     print 'Please, type the label color of the music album: '
@@ -96,7 +98,9 @@ class App # rubocop:disable Metrics
     @labels.find { |l| l.title == label && l.color == color }.add_item(@music_albums.last)
     @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
     @genres.find { |g| g.name == genre }.add_item(@music_albums.last)
-    @authors.push(Author.new(first_name, last_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == last_name }
+    @authors.push(Author.new(first_name, last_name)) unless @authors.any? do |a|
+                                                              a.first_name == first_name && a.last_name == last_name
+                                                            end
     @authors.find { |a| a.first_name == first_name && a.last_name == last_name }.add_item(@music_albums.last)
     puts 'Music album created successfully'
   end
@@ -115,7 +119,7 @@ class App # rubocop:disable Metrics
     end
   end
 
-  def add_game
+  def add_game # rubocop:disable Metrics
     print 'Please, type the label title of the game: '
     label = gets.chomp.capitalize
     print 'Please, type the label color of the game: '
@@ -137,7 +141,9 @@ class App # rubocop:disable Metrics
     @labels.find { |l| l.title == label && l.color == color }.add_item(@games.last)
     @genres.push(Genre.new(genre)) unless @genres.any? { |g| g.name == genre }
     @genres.find { |g| g.name == genre }.add_item(@games.last)
-    @authors.push(Author.new(first_name, last_name)) unless @authors.any? { |a| a.first_name == first_name && a.last_name == last_name }
+    @authors.push(Author.new(first_name, last_name)) unless @authors.any? do |a|
+                                                              a.first_name == first_name && a.last_name == last_name
+                                                            end
     @authors.find { |a| a.first_name == first_name && a.last_name == last_name }.add_item(@games.last)
     puts 'Game created successfully'
   end
