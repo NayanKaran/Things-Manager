@@ -9,12 +9,8 @@ class MusicAlbum < Item
     @id = id
     @label = label
     @genre = genre
-    @on_spotify = on_spotify
+    @on_spotify = true
     @publish_date = publish_date
-  end
-
-  def on_spotify(on_spotify: true)
-    on_spotify
   end
 
   def to_json(*_args)

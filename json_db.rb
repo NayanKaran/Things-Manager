@@ -36,11 +36,10 @@ def load_music_albums(app)
 
   JSON.parse(File.read('./data/music_albums.json')).each do |music_album|
     # get the label with the id of the music album
-    label = app.labels.find { |label| label.id == music_album['label'] }
+    label = app.labels.find { |l| l.id == music_album['label'] }
     app.music_albums << MusicAlbum.new(label, music_album['genre'],
-      publish_date: music_album['publish_date'],
-      id: music_album['id']
-    )
+                                       publish_date: music_album['publish_date'],
+                                       id: music_album['id'])
     app.music_albums.last.move_to_archive if music_album['archived']
   end
 end
