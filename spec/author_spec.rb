@@ -1,5 +1,5 @@
 require_relative '../author'
-require './game'
+require_relative './game'
 require 'yaml'
 
 describe Author do
