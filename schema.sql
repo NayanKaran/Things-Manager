@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS 'books' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL,
+  'publisher' TEXT NOT NULL,
+  'publish_date' DATE NOT NULL,
+  'achived' BOOLEAN NOT NULL DEFAULT FALSE,
+  'cover_state' TEXT NOT NULL,
+  'label_id' INTEGER NOT NULL REFERENCES 'labels' ('id')
+);
+
+CREATE TABLE IF NOT EXISTS 'labels' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL,
+  'color' TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS 'genres' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS 'music_albums' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'name' TEXT NOT NULL,
+  'publish_date' DATE NOT NULL,
+  'achived' BOOLEAN NOT NULL DEFAULT FALSE,
+  'cover_state' TEXT NOT NULL,
+  'label_id' INTEGER NOT NULL REFERENCES 'labels' ('id'),
+  'genre_id' INTEGER NOT NULL REFERENCES 'genres' ('id')
+);
